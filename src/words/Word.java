@@ -70,10 +70,18 @@ public class Word {
 		return seen;
 	}
 
+	/**
+	 * Đặt trạng thái đã học
+	 * @param seen đã học chưa (true/false)
+	 */
 	public void setSeen(boolean seen) {
 		this.seen = seen;
 	}
 
+	/**
+	 * Biểu diễn từ dưới dạng Anh - Việt
+	 * @return dạng Anh - Việt
+	 */
 	@Override
 	public String toString(){
 		return String.format("%s:%n%s", en, vi);

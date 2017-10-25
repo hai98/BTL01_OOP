@@ -7,6 +7,6 @@ public class ProgramManager {
 		RunningData.loadData();
 //		System.out.println(Search.searchAll("apple"));
 		GUIMain.main(args);
-		System.out.println(RunningData.getCollectionList().get(0).getSize());
+//		System.out.println(RunningData.getCollectionList().get(0).getSize());
 	}
 }

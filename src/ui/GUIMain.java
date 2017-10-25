@@ -1,14 +1,18 @@
 package ui;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import words.Search;
+
+import java.io.IOException;
 
 public class GUIMain extends Application {
 
@@ -16,11 +20,18 @@ public class GUIMain extends Application {
 		launch(args);
 	}
 
-	private Button btn, btn1;
-	private Label lbl;
+	/*private Button btn, btn1;
+	private Label lbl;*/
+
+	private static Stage tmp;
+
+	public static Stage getTmp() {
+		return tmp;
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
-		btn = new Button();
+		/*btn = new Button();
 		btn.setText("Tra tu");
 		btn.setOnAction(e -> lbl.setText(Search.searchAll("mango").toString()));
 		lbl = new Label("English");
@@ -29,8 +40,9 @@ public class GUIMain extends Application {
 
 		BorderPane pane  = new BorderPane();
 		pane.setCenter(btn);
+		pane.setAlignment(btn, Pos.TOP_RIGHT);
 		pane.setTop(lbl);
-		pane.setAlignment(lbl, Pos.TOP_CENTER);
+		pane.setAlignment(lbl, Pos.TOP_LEFT);
 		pane.setBottom(btn1);
 		pane.setAlignment(btn1, Pos.BOTTOM_CENTER);
 
@@ -42,6 +54,19 @@ public class GUIMain extends Application {
 		primaryStage.setOnCloseRequest(e-> {
 			e.consume();
 			primaryStage.close();});
-		primaryStage.show();
+		primaryStage.show();*/
+
+		primaryStage.setTitle("Event Handling");
+		tmp = primaryStage;
+
+		try {
+			FXMLLoader loader = new FXMLLoader(GUIMain.class.getResource("LookUp.fxml"));
+			AnchorPane page = loader.load();
+			Scene scene = new Scene(page);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

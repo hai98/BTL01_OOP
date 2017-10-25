@@ -56,7 +56,7 @@ public class GUIMain extends Application {
 			primaryStage.close();});
 		primaryStage.show();*/
 
-		primaryStage.setTitle("Event Handling");
+		primaryStage.setTitle("E-V_app_beta");
 		tmp = primaryStage;
 
 		try {

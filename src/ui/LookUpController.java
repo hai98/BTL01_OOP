@@ -26,17 +26,15 @@ public class LookUpController {
 	@FXML
 	private Button btn;
 
-//	@FXML
-//	private TextField au;
-
 	@FXML
 	private void initialize(){
-//		String[] possibe = {"hi", "hello", "how are you", "haha"};
+		String[] possibe = {"apple", "mango", "banana", "lemon", "pineapple", "coconut", "blueberry", "orange"};
 
-//		TextFields.bindAutoCompletion(au, possibe);
+		TextFields.bindAutoCompletion(lookUp, possibe);
 
 		search.setOnAction(e -> {
-			label.setText(Search.searchAll(lookUp.getText()).toString());
+//			label.setText(Search.searchAll(lookUp.getText()).toString());
+			textArea.setText(Search.searchAll(lookUp.getText()).toString());
 		});
 
 		btn.setOnAction(e -> {

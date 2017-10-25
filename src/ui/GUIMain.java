@@ -20,9 +20,6 @@ public class GUIMain extends Application {
 		launch(args);
 	}
 
-	/*private Button btn, btn1;
-	private Label lbl;*/
-
 	private static Stage tmp;
 
 	public static Stage getTmp() {
@@ -31,30 +28,6 @@ public class GUIMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		/*btn = new Button();
-		btn.setText("Tra tu");
-		btn.setOnAction(e -> lbl.setText(Search.searchAll("mango").toString()));
-		lbl = new Label("English");
-		btn1 = new Button("Close");
-		btn1.setOnAction(e -> primaryStage.close());
-
-		BorderPane pane  = new BorderPane();
-		pane.setCenter(btn);
-		pane.setAlignment(btn, Pos.TOP_RIGHT);
-		pane.setTop(lbl);
-		pane.setAlignment(lbl, Pos.TOP_LEFT);
-		pane.setBottom(btn1);
-		pane.setAlignment(btn1, Pos.BOTTOM_CENTER);
-
-		Scene scene = new Scene(pane, 500, 250);
-		primaryStage.setMinHeight(250);
-		primaryStage.setMinWidth(500);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("E->V_app_oop_beta");
-		primaryStage.setOnCloseRequest(e-> {
-			e.consume();
-			primaryStage.close();});
-		primaryStage.show();*/
 
 		primaryStage.setTitle("E-V_app_beta");
 		tmp = primaryStage;

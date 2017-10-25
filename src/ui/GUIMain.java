@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import words.Search;
@@ -34,8 +35,8 @@ public class GUIMain extends Application {
 
 		try {
 			FXMLLoader loader = new FXMLLoader(GUIMain.class.getResource("LookUp.fxml"));
-			AnchorPane page = loader.load();
-			Scene scene = new Scene(page);
+			VBox pane = loader.load();
+			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {

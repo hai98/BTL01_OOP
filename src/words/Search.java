@@ -17,6 +17,6 @@ public class Search {
 			if(i.get(key)!=null)
 				return i.get(key);
 		}
-		return new Word("Word not found", "");
+		return new Word("Word not found", "--> You can add new word", "");
 	}
 }

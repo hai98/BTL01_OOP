@@ -3,19 +3,27 @@ package io;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import words.RunningData;
 import words.Word;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class thực hiện việc đọc file, nạp từ vựng
  */
 public abstract class ImportVoc {
+	private static HashSet<String> suggestion;
+	static {
+		suggestion = new HashSet<>();
+	}
+
+	public static HashSet<String> getSuggestion() {
+		return suggestion;
+	}
+
 	/**
 	 * Đọc dữ liệu từ file excel
 	 * @param xlsxPath đường dẫn đến file excel
@@ -30,17 +38,20 @@ public abstract class ImportVoc {
 			Iterator<Row> rowIterator = sheet.rowIterator();
 			rowIterator.next();
 			Row row;
-			String en, vi;
+			String en, vi, pronun;
 			while (rowIterator.hasNext()){
 				row = rowIterator.next();
 				en = row.getCell(0).getStringCellValue();
 				vi = row.getCell(1).getStringCellValue();
-				wordHashMap.put(en, new Word(en, vi));
+				pronun = row.getCell(2).getStringCellValue();
+				wordHashMap.put(en, new Word(en, vi, pronun));
+				suggestion.add(en);
 			}
 			fileIn.close();
 			return wordHashMap;
 		} catch (IOException e){
 			return new HashMap<>();
 		}
+
 	}
 }

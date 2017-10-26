@@ -6,7 +6,7 @@ package words;
 public class Word {
 	private String en;
 	private String vi;
-//	private String pronun;
+	private String pronun;
 //	private String imgPath;
 	private boolean seen;
 
@@ -28,6 +28,12 @@ public class Word {
 		this();
 		this.en = en;
 		this.vi = vi;
+	}
+
+	public Word(String en, String vi, String pronun){
+		this.en = en;
+		this.vi = vi;
+		this.pronun = pronun;
 	}
 
 	/**
@@ -84,7 +90,7 @@ public class Word {
 	 */
 	@Override
 	public String toString(){
-		return String.format("%s:%n%s", en, vi);
+		return String.format("%s\t%s%n----------------------------------%n%s", en, pronun, vi);
 	}
 
 }

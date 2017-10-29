@@ -27,8 +27,9 @@ public class GUIMain extends Application {
 		mainStage = primaryStage;
 
 		try {
-			FXMLLoader loader = new FXMLLoader(GUIMain.class.getResource("LookUp.fxml"));
-			VBox pane = loader.load();
+//			FXMLLoader loader = new FXMLLoader(GUIMain.class.getResource("look_up_view.fxml"));
+//			VBox pane = loader.load();
+			VBox pane = (VBox) FXMLLoader.load(getClass().getResource("look_up_view.fxml"));
 			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);
 			primaryStage.show();

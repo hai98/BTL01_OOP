@@ -37,7 +37,7 @@ public class WordCollection {
 	 * Thêm một từ vựng vào bộ từ
 	 * @param w từ vựng
 	 */
-	public void put(Word w){
+	public void putWord(Word w){
 		if(wordList.containsKey(w.getEn())) return;
 		wordList.put(w.getEn(), w);
 		++size;
@@ -48,7 +48,7 @@ public class WordCollection {
 	 * @param en từ khóa tiếng anh
 	 * @return từ vựng
 	 */
-	public Word get(String en){
+	public Word getWord(String en){
 		if(wordList != null)
 			return wordList.get(en);
 		return null;
@@ -70,7 +70,7 @@ public class WordCollection {
 		return wordList;
 	}
 
-//	public void setWordList(Map<String, Word> wordList) {
-//		this.wordList = wordList;
-//	}
+	public void deleteWord(String key){
+		wordList.remove(key);
+	}
 }

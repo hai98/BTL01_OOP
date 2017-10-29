@@ -3,10 +3,9 @@ package words;
 /**
  * Class biểu diễn một đối tượng từ vựng
  */
-public class Word {
+public class Word implements Comparable<Word> {
 	private String en;
 	private String vi;
-	private String pronun;
 //	private String imgPath;
 	private boolean seen;
 
@@ -28,12 +27,6 @@ public class Word {
 		this();
 		this.en = en;
 		this.vi = vi;
-	}
-
-	public Word(String en, String vi, String pronun){
-		this.en = en;
-		this.vi = vi;
-		this.pronun = pronun;
 	}
 
 	/**
@@ -90,7 +83,22 @@ public class Word {
 	 */
 	@Override
 	public String toString(){
-		return String.format("%s\t%s%n----------------------------------%n%s", en, pronun, vi);
+		return String.format("%s%n----------------------------------%n%s", en, vi);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) return false;
+		if (obj == this) return true;
+		if (obj.getClass() != this.getClass()) return false;
+		else {
+			return ((Word) obj).vi.compareTo(this.vi) == 0;
+		}
+	}
+
+	@Override
+	public int compareTo(Word o) {
+		if (o == this) return 0;
+		return this.vi.compareTo(o.vi);
+	}
 }

@@ -13,11 +13,11 @@ import java.util.List;
 
 public class RunningData {
 	private static List<WordCollection> collectionList;
-	private static HashSet<String> suggestionList;
+//	private static HashSet<String> suggestionList;
 
-	public static HashSet<String> getSuggestionList() {
-		return suggestionList;
-	}
+//	public static HashSet<String> getSuggestionList() {
+//		return suggestionList;
+//	}
 
 	/**
 	 * Nạp dữ liệu vào chương trình
@@ -25,7 +25,7 @@ public class RunningData {
 	public static void loadData() {
 		collectionList = new ArrayList<>(10);
 		collectionList.add(new WordCollection("fruit","res/voc/fruit.xlsx"));
-		suggestionList = ImportVoc.getSuggestion();
+//		suggestionList = ImportVoc.getSuggestion();
 	}
 
 	/**

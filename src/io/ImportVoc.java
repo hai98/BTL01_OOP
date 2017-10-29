@@ -38,13 +38,12 @@ public abstract class ImportVoc {
 			Iterator<Row> rowIterator = sheet.rowIterator();
 			rowIterator.next();
 			Row row;
-			String en, vi, pronun;
+			String en, vi;
 			while (rowIterator.hasNext()){
 				row = rowIterator.next();
 				en = row.getCell(0).getStringCellValue();
 				vi = row.getCell(1).getStringCellValue();
-				pronun = row.getCell(2).getStringCellValue();
-				wordHashMap.put(en, new Word(en, vi, pronun));
+				wordHashMap.put(en, new Word(en, vi));
 				suggestion.add(en);
 			}
 			fileIn.close();

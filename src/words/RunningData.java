@@ -3,8 +3,6 @@ package words;
 import io.ImportVoc;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,7 +10,7 @@ import java.util.List;
  */
 
 public class RunningData {
-	private static List<WordCollection> collectionList;
+	private static List<WordCollection> collectionList = new ArrayList<>(10);
 //	private static HashSet<String> suggestionList;
 
 //	public static HashSet<String> getSuggestionList() {
@@ -23,8 +21,7 @@ public class RunningData {
 	 * Nạp dữ liệu vào chương trình
 	 */
 	public static void loadData() {
-		collectionList = new ArrayList<>(10);
-		collectionList.add(new WordCollection("fruit","res/voc/fruit.xlsx"));
+		collectionList.add(ImportVoc.loadExcelFile("res/voc/fruit.xlsx"));
 //		suggestionList = ImportVoc.getSuggestion();
 	}
 
@@ -38,5 +35,9 @@ public class RunningData {
 
 	private static void setCollectionList(List<WordCollection> collectionList) {
 		RunningData.collectionList = collectionList;
+	}
+
+	public static void addCollection(String xlsxPath){
+		collectionList.add(ImportVoc.loadExcelFile(xlsxPath));
 	}
 }

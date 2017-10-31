@@ -1,13 +1,13 @@
 package words;
 
-import io.ImportVoc;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Class biểu diễn một đối tượng bộ từ vựng theo chủ đề
  */
 public class WordCollection {
-	private String subject;
+	private String topic;
 	private String pathToExcel;
 	private int size;
 	private Map<String, Word> wordList;
@@ -16,21 +16,20 @@ public class WordCollection {
 	 * Khởi tạo bộ từ không tham số
 	 */
 	public WordCollection(){
-		subject = "no name";
+		topic = "no name";
 		size = 0;
 		wordList = null;
 	}
 
 	/**
 	 * Khởi tạo bộ từ có tham số
-	 * @param subject chủ đề của bộ từ
-	 * @param pathToExcel đường dẫn đến file excel chứa bô từ
+	 * @param topic chủ đề của bộ từ
+	 * @param wordList HasMap chứa các từ
 	 */
-	public WordCollection(String subject, String pathToExcel) {
-		this();
-		this.subject = subject;
-		wordList = ImportVoc.toWordHashMap(pathToExcel);
-		size = wordList.size();
+	public WordCollection(String topic, Map<String, Word> wordList) {
+		this.topic = topic;
+		this.wordList = wordList;
+		size = this.wordList.size();
 	}
 
 	/**
@@ -72,5 +71,14 @@ public class WordCollection {
 
 	public void deleteWord(String key){
 		wordList.remove(key);
+		size = wordList.size();
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 }

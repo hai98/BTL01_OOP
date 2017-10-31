@@ -13,6 +13,7 @@ import words.Search;
 import words.Word;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class LookUpController implements Initializable {
@@ -35,9 +36,6 @@ public class LookUpController implements Initializable {
 	private Button btnDelete;
 
 	@FXML
-	private MenuItem itmClose;
-
-	@FXML
 	private ListView<String> historyList;
 
 	@Override
@@ -50,8 +48,12 @@ public class LookUpController implements Initializable {
 		btnDelete.setDisable(true);
 
 		btnSearch.setOnAction(e -> {
-			if (!lookUp.getText().isEmpty())
+			if (!lookUp.getText().isEmpty()) {
 				setTextArea(lookUp.getText());
+				if (lookUp.getText().compareTo(history.get(0)) != 0)
+					history.add(0, lookUp.getText());
+			}
+
 		});
 
 		btnClose.setOnAction(e -> {
@@ -72,12 +74,9 @@ public class LookUpController implements Initializable {
 		});
 
 		lookUp.setOnAction(e -> {
+			setTextArea(lookUp.getText());
 			if (!lookUp.getText().isEmpty() && lookUp.getText().compareTo(history.get(0)) != 0)
 				history.add(0, lookUp.getText());
-		});
-
-		itmClose.setOnAction(e -> {
-			GUIMain.getMainStage().close();
 		});
 
 		historyList.getSelectionModel().selectedItemProperty().addListener((ov, oldVal, newVal) -> {
@@ -88,11 +87,14 @@ public class LookUpController implements Initializable {
 		if(sKey.isEmpty()) {
 			textArea.setText("");
 		} else {
-			Word tmp = Search.searchAll(sKey);
-			if(tmp != null){
+			List<Word> tmp = Search.searchAll(sKey);
+			if(!tmp.isEmpty()){
 				btnDelete.setDisable(false);
-				textArea.setText(tmp.toString());
-				key = tmp.getEn();
+				textArea.setText(tmp.get(0).getEn());
+				textArea.appendText("\n-------------------("+tmp.size()+")---------------------\n");
+				for (Word i : tmp)
+					textArea.appendText(String.format("%n+    %s    (%s)", i.getVi(), i.getTopic()));
+				key = tmp.get(0).getEn();
 			}else {
 				textArea.setText("Word not found :((\nYou can add new word");
 				btnDelete.setDisable(true);

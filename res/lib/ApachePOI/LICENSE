@@ -205,7 +205,7 @@
 APACHE POI SUBCOMPONENTS:
 
 Apache POI includes subcomponents with separate copyright notices and
-license terms. Your use of these subcomponents is subject to the terms
+license terms. Your use of these subcomponents is topic to the terms
 and conditions of the following licenses:
 
 
@@ -238,7 +238,7 @@ Bouncy Castle library (bcprov-*.jar, bcpg-*.jar, bcpkix-*.jar)
     deal in the Software without restriction, including without limitation the
     rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
     sell copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
+    furnished to do so, topic to the following conditions:
 
     The above copyright notice and this permission notice shall be included in
     all copies or substantial portions of the Software.
@@ -440,7 +440,7 @@ JUnit test library (junit-4.*.jar) & JaCoCo (*jacoco*)
     Steward. The Eclipse Foundation may assign the responsibility to serve as
     the Agreement Steward to a suitable separate entity. Each new version of
     the Agreement will be given a distinguishing version number. The Program
-    (including Contributions) may always be distributed subject to the version
+    (including Contributions) may always be distributed topic to the version
     of the Agreement under which it was received. In addition, after a new
     version of the Agreement is published, Contributor may elect to distribute
     the Program (including its Contributions) under the new version. Except as
@@ -498,7 +498,7 @@ SLF4J library (slf4j-api-*.jar)
     "Software"), to  deal in  the Software without  restriction, including
     without limitation  the rights to  use, copy, modify,  merge, publish,
     distribute,  sublicense, and/or sell  copies of  the Software,  and to
-    permit persons to whom the Software  is furnished to do so, subject to
+    permit persons to whom the Software  is furnished to do so, topic to
     the following conditions:
 
     The  above  copyright  notice  and  this permission  notice  shall  be
@@ -523,7 +523,7 @@ inbot-utils (https://github.com/Inbot/inbot-utils)
 	in the Software without restriction, including without limitation the rights
 	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
+	furnished to do so, topic to the following conditions:
 	
 	The above copyright notice and this permission notice shall be included in all
 	copies or substantial portions of the Software.

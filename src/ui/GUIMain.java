@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -25,6 +26,7 @@ public class GUIMain extends Application {
 
 		primaryStage.setTitle("E-V_app_beta");
 		mainStage = primaryStage;
+//		primaryStage.initStyle(StageStyle.TRANSPARENT);
 
 		try {
 //			FXMLLoader loader = new FXMLLoader(GUIMain.class.getResource("look_up_view.fxml"));

@@ -1,5 +1,6 @@
 package words;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,14 +10,15 @@ public class Search {
 	/**
 	 * Tìm từ trong tất cả các bộ từ vựng
 	 * @param key từ khóa tìm kiếm (tiếng Anh)
-	 * @return từ vựng nếu có, ngược lại trả về null
+	 * @return List các từ vựng
 	 */
-	public static Word searchAll(String key){
+	public static List<Word> searchAll(String key){
 		List<WordCollection> list = RunningData.getCollectionList();
+		List<Word> result = new LinkedList<>();
 		for (WordCollection i : list){
 			if(i.getWord(key)!=null)
-				return i.getWord(key);
+				result.add(i.getWord(key));
 		}
-		return null;
+		return result;
 	}
 }

@@ -6,6 +6,7 @@ package words;
 public class Word implements Comparable<Word> {
 	private String en;
 	private String vi;
+	private String topic;
 //	private String imgPath;
 	private boolean seen;
 
@@ -23,10 +24,11 @@ public class Word implements Comparable<Word> {
 	 * @param en từ trong tiếng anh
 	 * @param vi nghĩa của từ trong tiếng việt
 	 */
-	public Word(String en, String vi){
+	public Word(String en, String vi, String topic){
 		this();
 		this.en = en;
 		this.vi = vi;
+		this.topic = topic;
 	}
 
 	/**
@@ -59,6 +61,14 @@ public class Word implements Comparable<Word> {
 	 */
 	public void setVi(String vi) {
 		this.vi = vi;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 
 	/**

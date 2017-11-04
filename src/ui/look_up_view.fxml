@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
@@ -24,6 +25,7 @@
          <children>
             <Label text="Search History" />
             <Region HBox.hgrow="ALWAYS" />
+            <CheckBox fx:id="cBox" mnemonicParsing="false" text="Tra cứu trong các từ đã học" />
             <Button fx:id="btnSearch" alignment="CENTER" mnemonicParsing="false" text=" Search">
                <tooltip>
                   <Tooltip text="Click to search" />
@@ -57,7 +59,8 @@
                   <Insets left="10.0" />
                </HBox.margin>
                <children>
-                  <Button mnemonicParsing="false" text="Edit" />
+                  <Button fx:id="btnAdd" layoutX="24.0" layoutY="129.0" mnemonicParsing="false" text="Add" />
+                  <Button fx:id="btnEdit" mnemonicParsing="false" text="Edit" />
                   <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete" />
                </children>
                <padding>

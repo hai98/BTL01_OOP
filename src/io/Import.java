@@ -1,5 +1,6 @@
 package io;
 
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,7 +16,7 @@ import java.util.*;
 /**
  * Class thực hiện việc đọc file, nạp từ vựng
  */
-public abstract class ImportVoc {
+public abstract class Import {
 //	private static HashSet<String> suggestion = new HashSet<>();
 
 //	public static HashSet<String> getSuggestion() {
@@ -27,7 +28,7 @@ public abstract class ImportVoc {
 	 * @param xlsxPath đường dẫn đến file excel
 	 * @return bộ từ vựng
 	 */
-	public static WordCollection loadExcelFile(String xlsxPath) {
+	public static WordCollection readExcelFile(String xlsxPath) {
 		try {
 			FileInputStream fileIn = new FileInputStream(new File(xlsxPath));
 			XSSFWorkbook workbook = new XSSFWorkbook(fileIn);
@@ -39,11 +40,13 @@ public abstract class ImportVoc {
 			rowIterator.next();
 			Row row;
 			String en, vi;
-			while (rowIterator.hasNext()){
+			boolean seen;
+			while (rowIterator.hasNext()) {
 				row = rowIterator.next();
 				en = row.getCell(0).getStringCellValue();
 				vi = row.getCell(1).getStringCellValue();
-				wordHashMap.put(en, new Word(en, vi, topic));
+				seen = row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getCell(2).getBooleanCellValue();
+				wordHashMap.put(en, new Word(en, vi, topic, seen));
 //				suggestion.add(en);
 			}
 			fileIn.close();

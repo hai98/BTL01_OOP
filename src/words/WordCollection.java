@@ -9,7 +9,6 @@ import java.util.Map;
 public class WordCollection {
 	private String topic;
 	private String pathToExcel;
-	private int size;
 	private Map<String, Word> wordList;
 
 	/**
@@ -17,19 +16,17 @@ public class WordCollection {
 	 */
 	public WordCollection(){
 		topic = "no name";
-		size = 0;
 		wordList = null;
 	}
 
 	/**
 	 * Khởi tạo bộ từ có tham số
 	 * @param topic chủ đề của bộ từ
-	 * @param wordList HasMap chứa các từ
+	 * @param wordList HashMap chứa các từ
 	 */
 	public WordCollection(String topic, Map<String, Word> wordList) {
 		this.topic = topic;
 		this.wordList = wordList;
-		size = this.wordList.size();
 	}
 
 	/**
@@ -37,9 +34,7 @@ public class WordCollection {
 	 * @param w từ vựng
 	 */
 	public void putWord(Word w){
-		if(wordList.containsKey(w.getEn())) return;
 		wordList.put(w.getEn(), w);
-		++size;
 	}
 
 	/**
@@ -48,7 +43,7 @@ public class WordCollection {
 	 * @return từ vựng
 	 */
 	public Word getWord(String en){
-		if(wordList != null)
+		if(en != null)
 			return wordList.get(en);
 		return null;
 	}
@@ -57,8 +52,8 @@ public class WordCollection {
 	 * Lấy số lượng từ trong bộ từ
 	 * @return số lượng từ
 	 */
-	public int getSize(){
-		return size;
+	public int size(){
+		return wordList.size();
 	}
 
 	/**
@@ -69,16 +64,36 @@ public class WordCollection {
 		return wordList;
 	}
 
+	/**
+	 * Xoá từ trong bộ từ
+	 * @param key từ cần xoá
+	 */
 	public void deleteWord(String key){
 		wordList.remove(key);
-		size = wordList.size();
 	}
 
+	/**
+	 * Lấy chủ đề bộ từ
+	 * @return chủ đề bộ từ
+	 */
 	public String getTopic() {
 		return topic;
 	}
 
+	/**
+	 * Đặt chủ đề bộ từ
+	 * @param topic chủ đề muốn đặt
+	 */
 	public void setTopic(String topic) {
 		this.topic = topic;
+	}
+
+	/**
+	 * Kiểm tra từ đã tồn tại chưa
+	 * @param key từ
+	 * @return true nếu đã tồn tại, ngược lại false
+	 */
+	public boolean duplicate(String key){
+		return wordList.containsKey(key);
 	}
 }

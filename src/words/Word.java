@@ -7,7 +7,7 @@ public class Word implements Comparable<Word> {
 	private String en;
 	private String vi;
 	private String topic;
-//	private String imgPath;
+	private String imgPath;
 	private boolean seen;
 
 	/**
@@ -17,6 +17,7 @@ public class Word implements Comparable<Word> {
 		en = "en";
 		vi = "vi";
 		seen = false;
+		imgPath = null;
 	}
 
 	/**
@@ -24,11 +25,16 @@ public class Word implements Comparable<Word> {
 	 * @param en từ trong tiếng anh
 	 * @param vi nghĩa của từ trong tiếng việt
 	 */
-	public Word(String en, String vi, String topic){
+	public Word(String en, String vi, String topic, boolean seen){
 		this();
-		this.en = en;
-		this.vi = vi;
-		this.topic = topic;
+		setEn(en);
+		setVi(vi);
+		setTopic(topic);
+		this.seen = seen;
+	}
+	public Word(String en, String vi,String topic, boolean seen, String imgPath){
+		this(en, vi,topic,seen);
+		this.imgPath = imgPath;
 	}
 
 	/**
@@ -44,7 +50,7 @@ public class Word implements Comparable<Word> {
 	 * @param en từ tiếng anh
 	 */
 	public void setEn(String en) {
-		this.en = en;
+		this.en = en.trim().toLowerCase();
 	}
 
 	/**
@@ -60,7 +66,7 @@ public class Word implements Comparable<Word> {
 	 * @param vi nghiã tiếng việt
 	 */
 	public void setVi(String vi) {
-		this.vi = vi;
+		this.vi = vi.trim();
 	}
 
 	public String getTopic() {
@@ -68,7 +74,15 @@ public class Word implements Comparable<Word> {
 	}
 
 	public void setTopic(String topic) {
-		this.topic = topic;
+		this.topic = topic.trim();
+	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	/**
@@ -93,7 +107,7 @@ public class Word implements Comparable<Word> {
 	 */
 	@Override
 	public String toString(){
-		return String.format("%s%n----------------------------------%n%s", en, vi);
+		return String.format("%s: %s", en, vi);
 	}
 
 	@Override

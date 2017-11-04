@@ -1,8 +1,9 @@
 package words;
 
-import io.ImportVoc;
+import io.Import;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class RunningData {
 	private static List<WordCollection> collectionList = new ArrayList<>(10);
+	private static List<String> topics = new LinkedList<>();
 //	private static HashSet<String> suggestionList;
 
 //	public static HashSet<String> getSuggestionList() {
@@ -21,8 +23,9 @@ public class RunningData {
 	 * Nạp dữ liệu vào chương trình
 	 */
 	public static void loadData() {
-		collectionList.add(ImportVoc.loadExcelFile("res/voc/fruit.xlsx"));
-//		suggestionList = ImportVoc.getSuggestion();
+		addCollection("res/voc/fruit.xlsx");
+		addCollection("res/voc/animal.xlsx");
+//		suggestionList = Import.getSuggestion();
 	}
 
 	/**
@@ -38,6 +41,39 @@ public class RunningData {
 	}
 
 	public static void addCollection(String xlsxPath){
-		collectionList.add(ImportVoc.loadExcelFile(xlsxPath));
+		WordCollection t = Import.readExcelFile(xlsxPath);
+		collectionList.add(t);
+		topics.add(t.getTopic());
+	}
+
+	/**
+	 * Tìm từ trong tất cả các bộ từ vựng
+	 * @param key từ khóa tìm kiếm (tiếng Anh)
+	 * @return List các từ vựng
+	 */
+	public static List<Word> searchAll(String key){
+		key = key.trim().toLowerCase();
+		List<Word> result = new LinkedList<>();
+		for (WordCollection i : collectionList){
+			if(i.getWord(key)!=null)
+				result.add(i.getWord(key));
+		}
+		return result;
+	}
+
+	public static List<String> getTopics() {
+		return topics;
+	}
+
+	public static void addWord(Word w){
+		int i = topics.indexOf(w.getTopic());
+		collectionList.get(i).putWord(w);
+	}
+
+	public static void deleteWord(String key){
+		for (WordCollection i : collectionList){
+			if(i.getWord(key)!=null)
+				i.deleteWord(key);
+		}
 	}
 }

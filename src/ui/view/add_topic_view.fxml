@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="410.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AddTopicController">
+   <children>
+      <JFXTextField fx:id="topic" labelFloat="true" promptText="Chủ đề..." VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin></JFXTextField>
+      <HBox alignment="CENTER">
+         <children>
+            <Label fx:id="warning" textFill="#e40606" />
+            <Label fx:id="message" layoutX="10.0" layoutY="10.0" textFill="#4cd74a" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <JFXButton fx:id="btnOk" ripplerFill="#6d6ecf" style="-fx-background-color: #b8b8b8b8;" text="OK" />
+            <JFXButton fx:id="btnClose" ripplerFill="RED" style="-fx-background-color: #b8b8b8b8;" text="Đóng" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

@@ -1,5 +1,6 @@
 package ui;
 
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,13 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import words.RunningData;
 import words.Word;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,9 +38,6 @@ public class LookUpController implements Initializable {
 	private TextArea textArea;
 
 	@FXML
-	private Button btnClose;
-
-	@FXML
 	private Button btnDelete;
 
 	@FXML
@@ -48,14 +50,21 @@ public class LookUpController implements Initializable {
 	private ListView<String> historyList;
 
 	@FXML
-	private CheckBox cBox;
+	private JFXCheckBox cBox;
+
+	@FXML
+	private ImageView img;
+
+	@FXML
+	private MenuItem itmClear;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-//		TextFields.bindAutoCompletion(lookUp, RunningData.getSuggestionList());
-		ObservableList<String> history = FXCollections.observableArrayList();
-		history.addAll("apple", "orange", "pineapple", "grape", "strawberry", "coconut");
+//		TextFields.bindAutoCompletion(lookUp, RunningData.getSuggestion
+		key = "";
+		ObservableList<String> history = RunningData.loadHistoryList();
+		if(history.isEmpty()) history.add("");
 		historyList.setItems(history);
 		btnDelete.setDisable(true);
 		btnEdit.setDisable(true);
@@ -69,11 +78,6 @@ public class LookUpController implements Initializable {
 
 		});
 
-		btnClose.setOnAction(e -> {
-			Stage s = GUIMain.getMainStage();
-			s.close();
-		});
-
 		btnDelete.setOnAction(e -> {
 			boolean conf = ConfirmationBox.show("Are you sure?", "Delete Word", "Yes", "No");
 			if (conf){
@@ -82,14 +86,14 @@ public class LookUpController implements Initializable {
 			}
 		});
 
-//		btnEdit.setOnAction(e-> {
-//
-//		});
+		btnEdit.setOnAction(e-> {
+			EditWordController.setKey(key);
+			EditWordController.show();
+			setTextArea(key);
+		});
 
 		btnAdd.setOnAction(e-> {
-			AddWordController t = new AddWordController();
-			t.show("Thêm từ mới");
-//			t.setEn(lookUp.getText().trim().toLowerCase());
+			AddWordController.show();
 		});
 
 		lookUp.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -103,29 +107,55 @@ public class LookUpController implements Initializable {
 		});
 
 		historyList.getSelectionModel().selectedItemProperty().addListener((ov, oldVal, newVal) -> {
-			setTextArea(newVal);
+			if(newVal!= null) setTextArea(newVal);
 		});
 
 		cBox.setOnAction(e -> {
 			seenSelect = cBox.isSelected();
-			setTextArea(lookUp.getText());
+//			setTextArea(lookUp.getText());
+			setTextArea(key);
+		});
+
+		img.setOnMouseEntered(event -> {
+			img.setOpacity(1.0);
+		});
+
+		img.setOnMouseExited(event -> {
+			img.setOpacity(0.5);
+		});
+
+		itmClear.setOnAction(event -> {
+			history.clear();
 		});
 	}
 	private void setTextArea(String sKey){
 		sKey = sKey.trim().toLowerCase();
 		if(sKey.isEmpty()) {
 			textArea.setText("");
+			img.setImage(null);
 		} else {
 			List<Word> tmp = RunningData.searchAll(sKey);
 			if(!tmp.isEmpty()){
 				btnDelete.setDisable(false);
 				btnEdit.setDisable(false);
 				textArea.setText(tmp.get(0).getEn());
-				textArea.appendText("\n-------------------("+tmp.size()+")---------------------\n");
+				textArea.appendText("\n-------------------(" +tmp.size()+ ")---------------------\n");
 				for (Word i : tmp) {
+					String imgPath = i.getImgPath();
+					if(imgPath != null){
+						File f;
+						if(imgPath.contains("/") || imgPath.contains("\\")) {
+							f = new File(imgPath);
+						} else {
+							f = new File("res/img/"+imgPath);
+						}
+//						img.setImage(new Image("file:"+i.getImgPath()));
+						img.setImage(new Image(f.toURI().toString()));
+					}else img.setImage(null);
 					if(seenSelect) {
-						if (i.isSeen())
+						if (i.isSeen()) {
 							textArea.appendText(String.format("%n+    %s    (%s)", i.getVi(), i.getTopic()));
+						}
 						else textArea.appendText("\nBạn chưa học từ này");
 					} else {
 						textArea.appendText(String.format("%n+    %s    (%s)", i.getVi(), i.getTopic()));
@@ -133,10 +163,12 @@ public class LookUpController implements Initializable {
 				}
 				key = tmp.get(0).getEn();
 			}else {
-				textArea.setText("Word not found :((\nYou can add new word");
+				textArea.setText("Không tìm thấy từ vừa nhập :((\nBạn có thể thêm từ mới");
+				img.setImage(null);
 				btnDelete.setDisable(true);
 				btnEdit.setDisable(true);
 			}
 		}
 	}
 }
+//todo set default image

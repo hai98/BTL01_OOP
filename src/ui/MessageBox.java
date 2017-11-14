@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,6 +26,7 @@ public class MessageBox {
 		btnOK.setOnAction(e -> stage.close());
 
 		VBox pane = new VBox(20);
+		pane.setPadding(new Insets(20));
 		pane.getChildren().addAll(lbl, btnOK);
 		pane.setAlignment(Pos.CENTER);
 

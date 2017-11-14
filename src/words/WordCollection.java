@@ -1,6 +1,8 @@
 package words;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -8,15 +10,20 @@ import java.util.Map;
  */
 public class WordCollection {
 	private String topic;
-	private String pathToExcel;
+	private String fileName;
 	private Map<String, Word> wordList;
 
 	/**
-	 * Khởi tạo bộ từ không tham số
+	 * Khởi tạo bộ từ mặc định
 	 */
 	public WordCollection(){
 		topic = "no name";
-		wordList = null;
+		wordList = new HashMap<>();
+	}
+
+	public WordCollection(String topic){
+		this();
+		this.topic = topic;
 	}
 
 	/**
@@ -52,7 +59,7 @@ public class WordCollection {
 	 * Lấy số lượng từ trong bộ từ
 	 * @return số lượng từ
 	 */
-	public int size(){
+	public int getSize(){
 		return wordList.size();
 	}
 
@@ -88,12 +95,33 @@ public class WordCollection {
 		this.topic = topic;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	@Override
+	public String toString() {
+		return topic;
+	}
+
 	/**
 	 * Kiểm tra từ đã tồn tại chưa
 	 * @param key từ
 	 * @return true nếu đã tồn tại, ngược lại false
 	 */
-	public boolean duplicate(String key){
-		return wordList.containsKey(key);
+	public boolean containsWord(String key){
+		return wordList.containsKey(key.trim().toLowerCase());
+	}
+
+	public void resetSeen(){
+		List<Word> list = new LinkedList<>(wordList.values());
+		for (Word i : list){
+			i.setSeen(false);
+		}
+		list = null;
 	}
 }

@@ -4,7 +4,6 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import words.RunningData;
 import words.Word;
 import words.WordCollection;
 
@@ -25,32 +24,34 @@ public abstract class Import {
 
 	/**
 	 * Đọc dữ liệu từ file excel
-	 * @param xlsxPath đường dẫn đến file excel
+	 * @param fileExcel tên file excel
 	 * @return bộ từ vựng
 	 */
-	public static WordCollection readExcelFile(String xlsxPath) {
+	public static WordCollection readExcelFile(File fileExcel) {
 		try {
-			FileInputStream fileIn = new FileInputStream(new File(xlsxPath));
+			FileInputStream fileIn = new FileInputStream(fileExcel);
 			XSSFWorkbook workbook = new XSSFWorkbook(fileIn);
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			Map<String, Word> wordHashMap = new HashMap<>(sheet.getLastRowNum()-sheet.getFirstRowNum() + 10);
-			Iterator<Row> rowIterator = sheet.rowIterator();
-			String topic = sheet.getRow(0).getCell(0).getStringCellValue();
-			rowIterator.next();
-			rowIterator.next();
+			String topic = sheet.getRow(0).getCell(0).getStringCellValue().trim();
 			Row row;
-			String en, vi;
+			String en, vi, imgPath;
 			boolean seen;
-			while (rowIterator.hasNext()) {
-				row = rowIterator.next();
-				en = row.getCell(0).getStringCellValue();
-				vi = row.getCell(1).getStringCellValue();
-				seen = row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getCell(2).getBooleanCellValue();
-				wordHashMap.put(en, new Word(en, vi, topic, seen));
+			for (int i=2; i<=sheet.getLastRowNum(); ++i) {
+				row = sheet.getRow(i);
+				en = row.getCell(0).getStringCellValue().trim();
+				vi = row.getCell(1).getStringCellValue().trim();
+				seen = (row.getCell(2) != null) && (row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getCell(2).getBooleanCellValue());
+				imgPath = (row.getCell(3) == null)? null : row.getCell(3).getStringCellValue();
+				Word t = new Word(en, vi, topic, seen);
+				t.setImgPath(imgPath);
+				wordHashMap.put(en, t);
 //				suggestion.add(en);
 			}
 			fileIn.close();
-			return new WordCollection(topic, wordHashMap);
+			WordCollection t = new WordCollection(topic, wordHashMap);
+			t.setFileName(fileExcel.getName());
+			return t;
 		} catch (IOException e){
 			throw new RuntimeException(e);
 		}

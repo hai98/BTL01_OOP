@@ -1,0 +1,11 @@
+lemon
+lime
+kiwi
+president
+farmer
+teacher
+strawberry
+coconut
+grape
+apple
+

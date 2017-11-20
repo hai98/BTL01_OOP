@@ -1,5 +1,6 @@
 package ui;
 
+import io.Export;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,10 +49,10 @@ public class ManageController implements Initializable{
 	private TableView<WordCollection> tableView;
 
 	@FXML
-	private TableColumn colTopics;
+	private TableColumn<WordCollection, String> colTopics;
 
 	@FXML
-	private TableColumn colWords;
+	private TableColumn<WordCollection, Integer> colWords;
 
 	@FXML
 	private Button btnRefresh;
@@ -61,8 +62,8 @@ public class ManageController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		topics = FXCollections.observableArrayList(RunningData.getCollectionList());
-		colTopics.setCellValueFactory(new PropertyValueFactory<WordCollection, String>("topic"));
-		colWords.setCellValueFactory(new PropertyValueFactory<WordCollection, Integer>("size"));
+		colTopics.setCellValueFactory(new PropertyValueFactory<>("topic"));
+		colWords.setCellValueFactory(new PropertyValueFactory<>("size"));
 		tableView.setItems(topics);
 
 
@@ -89,7 +90,7 @@ public class ManageController implements Initializable{
 		colTopics.setCellFactory(TextFieldTableCell.forTableColumn());
 		colTopics.setOnEditCommit(event -> {
 			TableColumn.CellEditEvent<WordCollection, String> ce;
-			ce = (TableColumn.CellEditEvent<WordCollection, String>) event;
+			ce = event;
 			WordCollection t = ce.getRowValue();
 			t.setTopic(ce.getNewValue());
 		});
@@ -120,6 +121,7 @@ public class ManageController implements Initializable{
 				RunningData.addCollection(selectedFile);
 				MessageBox.show("Added new collection :))", "Info");
 			}
+			refresh();
 		});
 
 		itmExport.setOnAction(event -> {
@@ -130,7 +132,7 @@ public class ManageController implements Initializable{
 				fc.setInitialFileName("exported.xlsx");
 				File file = fc.showSaveDialog(null);
 				if (file != null) {
-					RunningData.export(file, t);
+					Export.writeExcelFile(t, file);
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText("Done");
 					alert.setTitle("Info");
@@ -150,4 +152,3 @@ public class ManageController implements Initializable{
 		topics.addAll(RunningData.getCollectionList());
 	}
 }
-//todo details windows for a wordcollection

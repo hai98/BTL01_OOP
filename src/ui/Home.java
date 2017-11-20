@@ -6,6 +6,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
@@ -20,9 +21,6 @@ public class Home implements Initializable{
 
 	@FXML
 	private HBox mainPane;
-
-	@FXML
-	private HBox main;
 
 	@FXML
 	private JFXButton btnHome;
@@ -42,6 +40,9 @@ public class Home implements Initializable{
 	@FXML
 	private JFXButton btnSettings;
 
+	@FXML
+	private GridPane gridPane;
+
 	private JFXButton lastBtn;
 
 	@Override
@@ -51,12 +52,16 @@ public class Home implements Initializable{
 		VBox welcome;
 		VBox manage;
 		HBox study;
+		VBox statistics;
+		VBox settings;
 
 		try {
 			lookUp = FXMLLoader.load(getClass().getResource("view/look_up_view.fxml"));
 			welcome = FXMLLoader.load(getClass().getResource("view/home_welcome.fxml"));
 			manage = FXMLLoader.load(getClass().getResource("view/manage_view.fxml"));
 			study = FXMLLoader.load(getClass().getResource("view/study_view.fxml"));
+			statistics = FXMLLoader.load(getClass().getResource("view/statistics_view.fxml"));
+			settings = FXMLLoader.load(getClass().getResource("view/settings_view.fxml"));
 
 			setMainPane(welcome);
 		} catch (IOException e) {
@@ -82,12 +87,22 @@ public class Home implements Initializable{
 			setMainPane(study);
 			setButtonBackground(btnStudy);
 		});
+
+		btnStatistics.setOnAction(event -> {
+			setMainPane(statistics);
+			setButtonBackground(btnStatistics);
+		});
+
+		btnSettings.setOnAction(event -> {
+			setMainPane(settings);
+			setButtonBackground(btnSettings);
+		});
 	}
 
 	private void setMainPane(Node node){
 		mainPane.getChildren().clear();
 		mainPane.getChildren().add(node);
-		mainPane.setHgrow(node, Priority.ALWAYS);
+		HBox.setHgrow(node, Priority.ALWAYS);
 	}
 
 	private void setButtonBackground(JFXButton btn){

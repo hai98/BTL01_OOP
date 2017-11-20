@@ -28,13 +28,16 @@ public class DetailsController implements Initializable{
 	private static Stage stage;
 
 	@FXML
-	private TableColumn colEn;
+	private TableColumn<Word, String> colEn;
 
 	@FXML
-	private TableColumn colVi;
+	private TableColumn<Word, String> colVi;
 
 	@FXML
-	private TableColumn colImg;
+	private TableColumn<Word, String> colImg;
+
+	@FXML
+	private TableColumn<Word, Boolean> colSeen;
 
 	@FXML
 	private Button btnAdd;
@@ -51,9 +54,10 @@ public class DetailsController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		list = FXCollections.observableArrayList(t.getWordList().values());
-		colEn.setCellValueFactory(new PropertyValueFactory<Word, String>("en"));
-		colVi.setCellValueFactory(new PropertyValueFactory<Word, String>("vi"));
-		colImg.setCellValueFactory(new PropertyValueFactory<Word, String>("imgPath"));
+		colEn.setCellValueFactory(new PropertyValueFactory<>("en"));
+		colVi.setCellValueFactory(new PropertyValueFactory<>("vi"));
+		colImg.setCellValueFactory(new PropertyValueFactory<>("imgPath"));
+		colSeen.setCellValueFactory(new PropertyValueFactory<>("seen"));
 		tableView.setItems(list);
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -73,10 +77,12 @@ public class DetailsController implements Initializable{
 
 		btnEdit.setOnAction(event -> {
 			Word w = tableView.getSelectionModel().getSelectedItem();
-			EditWordController.setKey(w.getEn());
-			EditWordController.t = t;
-			EditWordController.show();
-			refresh();
+			if (w!=null) {
+				EditWordController.setKey(w.getEn());
+				EditWordController.t = t;
+				EditWordController.show();
+				refresh();
+			}
 		});
 	}
 

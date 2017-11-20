@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #eeee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LearnController">
+   <children>
+      <HBox alignment="CENTER" spacing="5.0">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+         <children>
+            <JFXProgressBar fx:id="proBar" maxWidth="1.7976931348623157E308" prefHeight="5.0" prefWidth="400.0" progress="0.28" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </JFXProgressBar>
+            <Label fx:id="percent" text="20%" textFill="#459745">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox fx:id="congrat" alignment="CENTER" spacing="10.0">
+         <children>
+            <FontAwesomeIconView fill="#708dff" glyphName="THUMBS_ALT_UP" size="30" />
+            <Label text="Congratulation" textFill="#59b254">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <EmojiOneView fill="#a55beb" glyphName="TADA" size="30" />
+         </children>
+      </HBox>
+      <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <ImageView fx:id="imgView" blendMode="MULTIPLY" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="en" text="Label">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="vi" layoutX="292.0" layoutY="282.0" text="Label" textFill="#469dc2">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <JFXButton fx:id="btnShow" style="-fx-background-color: #dddd;" text="Show Answer">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </JFXButton>
+      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0" spacing="30.0">
+         <children>
+            <JFXButton fx:id="btnHard" layoutX="279.0" layoutY="21.0" ripplerFill="#ff7373" style="-fx-background-color: #dddd;" text="Hard" />
+            <JFXButton fx:id="btnGood" layoutX="310.0" layoutY="21.0" ripplerFill="#5e7fff" style="-fx-background-color: #dddd;" text="Good" />
+            <JFXButton fx:id="btnEasy" layoutX="325.0" layoutY="21.0" ripplerFill="#53b22a" style="-fx-background-color: #dddd;" text="Easy" />
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" spacing="70.0">
+         <children>
+            <Label fx:id="cHard" text="0" textFill="#f24848">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="cGood" text="0" textFill="#454d96">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="cEasy" text="0" textFill="#459745">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

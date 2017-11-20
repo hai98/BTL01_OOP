@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.DetailsController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="600.0" spacing="10.0">
@@ -24,6 +23,7 @@
         <columns>
           <TableColumn fx:id="colEn" prefWidth="75.0" text="English" />
           <TableColumn fx:id="colVi" prefWidth="75.0" text="Vietnamese" />
+            <TableColumn fx:id="colSeen" prefWidth="75.0" text="Seen" />
             <TableColumn fx:id="colImg" prefWidth="75.0" text="Image Path" />
         </columns>
          <columnResizePolicy>

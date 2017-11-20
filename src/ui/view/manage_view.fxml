@@ -35,7 +35,7 @@
                </graphic></Button>
             <MenuButton fx:id="btnMore" mnemonicParsing="false" text="More...">
               <items>
-                <MenuItem fx:id="itmImport" mnemonicParsing="false" text="Import Form Excel File">
+                <MenuItem fx:id="itmImport" mnemonicParsing="false" text="Import From Excel File">
                      <graphic>
                         <FontAwesomeIconView glyphName="DOWNLOAD" />
                      </graphic></MenuItem>

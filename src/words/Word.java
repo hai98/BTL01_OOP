@@ -9,6 +9,7 @@ public class Word implements Comparable<Word> {
 	private String topic;
 	private String imgPath;
 	private boolean seen;
+	private int level;
 
 	/**
 	 * Khởi tạo mặc định
@@ -18,6 +19,7 @@ public class Word implements Comparable<Word> {
 		vi = "vi";
 		seen = false;
 		imgPath = null;
+		level = 1;
 	}
 
 	/**
@@ -120,9 +122,17 @@ public class Word implements Comparable<Word> {
 		}
 	}
 
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	@Override
 	public int compareTo(Word o) {
 		if (o == this) return 0;
-		return this.vi.compareTo(o.vi);
+		return o.level - this.level;
 	}
 }

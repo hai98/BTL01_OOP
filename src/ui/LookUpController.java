@@ -116,13 +116,13 @@ public class LookUpController implements Initializable {
 			setTextArea(key);
 		});
 
-		img.setOnMouseEntered(event -> {
+		/*img.setOnMouseEntered(event -> {
 			img.setOpacity(1.0);
 		});
 
 		img.setOnMouseExited(event -> {
 			img.setOpacity(0.5);
-		});
+		});*/
 
 		itmClear.setOnAction(event -> {
 			history.clear();

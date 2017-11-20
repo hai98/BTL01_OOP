@@ -4,7 +4,6 @@ import io.Export;
 import io.Import;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.text.Normalizer;
@@ -18,6 +17,9 @@ public class RunningData {
 	private static List<WordCollection> collectionList = new ArrayList<>(10);
 	private static List<String> topics = new LinkedList<>();
 	private static ObservableList<String> history = FXCollections.observableArrayList();
+	private static int newWordPerDay;
+	private static int revWordPerDay;
+	private static int wordsForTest;
 
 //	private static HashSet<String> suggestionList;
 
@@ -35,6 +37,7 @@ public class RunningData {
 		for (File i : files) {
 			addCollection(i);
 		}
+		readSettings();
 	}
 
 	/**
@@ -47,6 +50,30 @@ public class RunningData {
 
 	private static void setCollectionList(List<WordCollection> collectionList) {
 		RunningData.collectionList = collectionList;
+	}
+
+	public static int getNewWordPerDay() {
+		return newWordPerDay;
+	}
+
+	public static void setNewWordPerDay(int newWordPerDay) {
+		RunningData.newWordPerDay = newWordPerDay;
+	}
+
+	public static int getRevWordPerDay() {
+		return revWordPerDay;
+	}
+
+	public static void setRevWordPerDay(int revWordPerDay) {
+		RunningData.revWordPerDay = revWordPerDay;
+	}
+
+	public static int getWordsForTest() {
+		return wordsForTest;
+	}
+
+	public static void setWordsForTest(int wordsForTest) {
+		RunningData.wordsForTest = wordsForTest;
 	}
 
 	public static void addCollection(File fileExcel){
@@ -99,17 +126,18 @@ public class RunningData {
 		collectionList.add(t);
 	}
 
-	public static void export(File dst, WordCollection t){
-		Export.writeExcelFile(t, dst);
-	}
-
-	public static void saveData() {
+	private static void saveCollectionList(){
 		for(WordCollection i : collectionList){
 			//todo change dir
 			File file = new File("res/test/"+i.getFileName());
 			Export.writeExcelFile(i, file);
 		}
+	}
+
+	public static void saveData() {
+		saveCollectionList();
 		saveHistoryList();
+		saveSettings();
 	}
 
 	public static void deleteCollection(WordCollection t){
@@ -160,5 +188,82 @@ public class RunningData {
 		t.resetSeen();
 		collectionList.add(t);
 		topics.add(name);
+	}
+
+	public static Queue<Word> prepareForLearn(WordCollection t){
+		if (t.getWordList().size() <= newWordPerDay){
+			return new LinkedList<>(t.getWordList().values());
+		}
+		//todo if all word seen
+		Queue<Word> words = new LinkedList<>();
+		ArrayList<Word> val = new ArrayList<>(t.getWordList().values());
+		for (int i = 0; i < val.size();) {
+			if(val.get(i).isSeen()) val.remove(i);
+			else ++i;
+		}
+		if (val.size() <=newWordPerDay) return new LinkedList<>(val);
+		int rand;
+		Word w;
+		while (words.size() < newWordPerDay){
+			rand = (int) (Math.random()*val.size());
+			w = val.get(rand);
+			if(words.contains(w)) continue;
+			words.offer(w);
+		}
+		return words;
+	}
+
+	public static List<Word> prepareForTest(WordCollection t){
+		ArrayList<Word> list = new ArrayList<>(t.getWordList().values());
+		/*for (int i = 0; i < list.size();) {
+			if(!list.get(i).isSeen()) {
+				list.remove(i);
+			}else ++i;
+		}*/
+		LinkedList<Word> words = new LinkedList<>();
+		int rand;
+		Word w;
+		while (words.size() < wordsForTest){
+			rand = (int) (Math.random()*list.size());
+			w = list.get(rand);
+			if(!words.contains(w))
+				words.add(w);
+		}
+		return words;
+	}
+
+	private static void readSettings(){
+		try {
+			File settingsFile = new File("res/settings.txt");
+			FileReader reader = new FileReader(settingsFile);
+			BufferedReader bufferedReader = new BufferedReader(reader);
+			String num;
+			num = bufferedReader.readLine();
+			newWordPerDay = Integer.parseInt(num);
+			num = bufferedReader.readLine();
+			revWordPerDay = Integer.parseInt(num);
+			num = bufferedReader.readLine();
+			wordsForTest = Integer.parseInt(num);
+			reader.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static void saveSettings(){
+		try {
+			System.out.println("called");
+			File file = new File("res/settings.txt");
+			FileWriter writer = new FileWriter(file, false);
+			BufferedWriter bufferedWriter = new BufferedWriter(writer);
+			bufferedWriter.write(String.valueOf(newWordPerDay));
+			bufferedWriter.newLine();
+			bufferedWriter.write(String.valueOf(revWordPerDay));
+			bufferedWriter.newLine();
+			bufferedWriter.write(String.valueOf(wordsForTest));
+			bufferedWriter.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

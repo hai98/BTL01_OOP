@@ -38,6 +38,7 @@ public class StudyController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		topics = FXCollections.observableArrayList(RunningData.getCollectionList());
 		topicsBox.setItems(topics);
+		btnReview.setDisable(false);
 
 		btnRand.setOnAction(event -> {
 			int i = (int) (Math.random()*topics.size());
@@ -49,6 +50,11 @@ public class StudyController implements Initializable{
 
 		btnLearn.setOnAction(event -> {
 			LearnController.t = topicsBox.getValue();
+			LearnController.show();
+		});
+
+		btnReview.setOnAction(event -> {
+			LearnController.t = null;
 			LearnController.show();
 		});
 

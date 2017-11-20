@@ -108,8 +108,7 @@ public class EditWordController implements Initializable {
 
 		btnChon.setOnAction(event -> {
 			FileChooser fc = new FileChooser();
-			String[] ext = {"*.jpg", "*.png", "*.gif"};
-			fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image File (*.jpg, *.png, *.gif)", ext));
+			fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image File (*.jpg, *.png, *.gif)", "*.jpg", "*.png", "*.gif"));
 			File selectedFile = fc.showOpenDialog(null);
 			if(selectedFile != null)
 				imgPath.setText(selectedFile.getAbsolutePath());

@@ -21,6 +21,10 @@ public class WordCollection {
 		wordList = new HashMap<>();
 	}
 
+	/**
+	 * Khởi tạo với tham số
+	 * @param topic tên bộ từ (chủ đề)
+	 */
 	public WordCollection(String topic){
 		this();
 		this.topic = topic;
@@ -95,14 +99,26 @@ public class WordCollection {
 		this.topic = topic;
 	}
 
+	/**
+	 * Lấy tên file chứa bộ từ
+	 * @return tên file
+	 */
 	public String getFileName() {
 		return fileName;
 	}
 
+	/**
+	 * Đặt tên file chứa bộ từ
+	 * @param fileName
+	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
+	/**
+	 * Biểu diễn bộ từ bằng String
+	 * @return tên bộ từ
+	 */
 	@Override
 	public String toString() {
 		return topic;
@@ -117,6 +133,9 @@ public class WordCollection {
 		return wordList.containsKey(key.trim().toLowerCase());
 	}
 
+	/**
+	 * Đặt tất cả các từ trong bộ từ là chưa học
+	 */
 	public void resetSeen(){
 		List<Word> list = new LinkedList<>(wordList.values());
 		for (Word i : list){

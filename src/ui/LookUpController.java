@@ -1,24 +1,16 @@
 package ui;
 
 import com.jfoenix.controls.JFXCheckBox;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import words.RunningData;
 import words.Word;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -63,7 +55,7 @@ public class LookUpController implements Initializable {
 
 //		TextFields.bindAutoCompletion(lookUp, RunningData.getSuggestion
 		key = "";
-		ObservableList<String> history = RunningData.loadHistoryList();
+		ObservableList<String> history = RunningData.readHistoryList();
 		if(history.isEmpty()) history.add("");
 		historyList.setItems(history);
 		btnDelete.setDisable(true);

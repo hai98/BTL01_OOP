@@ -38,6 +38,9 @@ public class TestController implements Initializable{
 	private Label lblQues;
 
 	@FXML
+	private Label lblPro;
+
+	@FXML
 	private JFXRadioButton ans1;
 
 	@FXML
@@ -157,6 +160,7 @@ public class TestController implements Initializable{
 				ans4.setText(ar[3].getEn());
 			}
 			prog.setProgress((userAns.size()+1.0)/quest.size());
+			lblPro.setText(String.format("%d/%d", userAns.size()+1, quest.size()));
 		} else {
 			Result.setRate(0);
 			for (int i=0; i<userAns.size(); ++i){

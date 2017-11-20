@@ -20,17 +20,18 @@ import words.WordCollection;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.ResourceBundle;
 
 public class LearnController implements Initializable {
 	static Stage stage;
-	static WordCollection t;
+	static boolean exit = false;
+	static boolean reviewMode = false;
+	static WordCollection t = null;
 	private Queue<Word> words;
 	private Word cur;
-	private PriorityQueue<Word> queue;
+	private PriorityQueue<Word> pQueue;
 	private int cE,cG,cH;
 
 	@FXML
@@ -76,49 +77,68 @@ public class LearnController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		congrat.setOpacity(0.0);
 		vi.setOpacity(0.0);
-		words = RunningData.prepareForLearn(t);
-		queue = new PriorityQueue<>(words.size());
-		cur = next();
-		cE=0; cG=0; cH=0;
-
-		btnShow.setOnAction(event -> {
-			vi.setOpacity(1.0);
-			btnGood.setDisable(false);
-			btnEasy.setDisable(false);
-			btnHard.setDisable(false);
-		});
-
-		btnEasy.setOnAction(event -> {
-			cur.setSeen(true);
-			if (cur.getLevel()==2) --cG;
-			else if (cur.getLevel()==3) --cH;
-			++cE;
+		if (t!=null) {
+			words = RunningData.prepareForLearn(t);
+			reviewMode = false;
+		}
+		else {
+			words = RunningData.prepareForReview();
+			reviewMode = true;
+		}
+		if (words == null){
+			MessageBox.show("No words for review", "Info");
+			exit = true;
+		} else {
+			exit = false;
+			pQueue = new PriorityQueue<>(words.size());
+			Queue<String> queueReview = RunningData.getQueueReview();
 			cur = next();
-		});
+			cE = 0;
+			cG = 0;
+			cH = 0;
 
-		btnHard.setOnAction(event -> {
-			cur.setLevel(3);
-			++cH;
-			queue.add(cur);
-			cur = next();
-		});
+			btnShow.setOnAction(event -> {
+				vi.setOpacity(1.0);
+				btnGood.setDisable(false);
+				btnEasy.setDisable(false);
+				btnHard.setDisable(false);
+			});
 
-		btnGood.setOnAction(event -> {
-			cur.setLevel(2);
-			++cG;
-			queue.add(cur);
-			cur = next();
-		});
+			btnEasy.setOnAction(event -> {
+				cur.setSeen(true);
+				if (cur.getLevel() == 2) --cG;
+				else if (cur.getLevel() == 3) --cH;
+				++cE;
+				if (!reviewMode)
+					queueReview.offer(cur.getEn());
+				cur = next();
+			});
 
+			btnHard.setOnAction(event -> {
+				cur.setLevel(3);
+				++cH;
+				pQueue.add(cur);
+				cur = next();
+			});
+
+			btnGood.setOnAction(event -> {
+				cur.setLevel(2);
+				++cG;
+				pQueue.add(cur);
+				cur = next();
+			});
+		}
 	}
 
 	static void show(){
 		try {
 			VBox pane = FXMLLoader.load(LearnController.class.getResource("view/learn_view.fxml"));
-			Scene scene = new Scene(pane);
+			if(exit) return;
 			stage = new Stage();
+			Scene scene = new Scene(pane);
 			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setTitle("Learn");
+			if (reviewMode) stage.setTitle("Review");
+			else stage.setTitle("Learn");
 //			stage.setResizable(false);
 			stage.setScene(scene);
 			stage.showAndWait();
@@ -151,8 +171,8 @@ public class LearnController implements Initializable {
 		if(!words.isEmpty()) {
 			w = words.poll();
 
-		}else if(!queue.isEmpty()) {
-			w = queue.poll();
+		}else if(!pQueue.isEmpty()) {
+			w = pQueue.poll();
 		}else {
 			congrat.setOpacity(1.0);
 			btnShow.setDisable(true);
@@ -161,7 +181,7 @@ public class LearnController implements Initializable {
 		en.setText(w.getEn());
 		vi.setText(w.getVi());
 		setImg(w.getImgPath());
-		proBar.setProgress((5 - words.size() - queue.size()) / 5.0);
+		proBar.setProgress((5 - words.size() - pQueue.size()) / 5.0);
 		percent.setText(String.format("%.1f%%", proBar.getProgress()*100));
 		return w;
 	}

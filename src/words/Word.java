@@ -1,7 +1,7 @@
 package words;
 
 /**
- * Class biểu diễn một đối tượng từ vựng
+ * Class biểu diễn một đối tượng từ
  */
 public class Word implements Comparable<Word> {
 	private String en;
@@ -23,9 +23,11 @@ public class Word implements Comparable<Word> {
 	}
 
 	/**
-	 * Khởi tạo từ vựng với tham số
-	 * @param en từ trong tiếng anh
+	 * Khởi tạo từ mới với tham số
+	 * @param en từ tiếng anh
 	 * @param vi nghĩa của từ trong tiếng việt
+	 * @param topic chủ đề
+	 * @param seen đã học chưa
 	 */
 	public Word(String en, String vi, String topic, boolean seen){
 		this();
@@ -34,6 +36,15 @@ public class Word implements Comparable<Word> {
 		setTopic(topic);
 		this.seen = seen;
 	}
+
+	/**
+	 * Khởi tạo từ mới với tham số
+	 * @param en từ tiếng anh
+	 * @param vi nghĩa của từ trong tiếng việt
+	 * @param topic chủ đề
+	 * @param seen đã học chưa
+	 * @param imgPath đường dẫn ảnh minh hoạ
+	 */
 	public Word(String en, String vi,String topic, boolean seen, String imgPath){
 		this(en, vi,topic,seen);
 		this.imgPath = imgPath;
@@ -71,18 +82,34 @@ public class Word implements Comparable<Word> {
 		this.vi = vi.trim();
 	}
 
+	/**
+	 * Lấy chủ đề của từ
+	 * @return chủ đề
+	 */
 	public String getTopic() {
 		return topic;
 	}
 
+	/**
+	 * Đặt chủ đề cho từ
+	 * @param topic chủ đề
+	 */
 	public void setTopic(String topic) {
 		this.topic = topic.trim();
 	}
 
+	/**
+	 * Lấy đường dẫn ảnh minh hoạ
+	 * @return đường dẫn ảnh
+	 */
 	public String getImgPath() {
 		return imgPath;
 	}
 
+	/**
+	 * Đặt đường dẫn ảnh minh hoạ cho từ
+	 * @param imgPath đường dẫn ảnh
+	 */
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
 	}
@@ -112,6 +139,11 @@ public class Word implements Comparable<Word> {
 		return String.format("%s: %s", en, vi);
 	}
 
+	/**
+	 * So sánh một từ với 1 đối tượng
+	 * @param obj đối tượng
+	 * @return true nếu bằng nhau, false nếu không
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) return false;
@@ -122,14 +154,27 @@ public class Word implements Comparable<Word> {
 		}
 	}
 
+	/**
+	 * Lấy level của từ
+	 * @return level
+	 */
 	public int getLevel() {
 		return level;
 	}
 
+	/**
+	 * Đặt level cho từ
+	 * @param level level
+	 */
 	public void setLevel(int level) {
 		this.level = level;
 	}
 
+	/**
+	 * So sánh level với từ khác
+	 * @param o từ khác
+	 * @return kết quả so sánh
+	 */
 	@Override
 	public int compareTo(Word o) {
 		if (o == this) return 0;

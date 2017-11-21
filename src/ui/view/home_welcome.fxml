@@ -33,7 +33,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </Text>
-      <Text fill="#5e5e5e" layoutX="164.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Today's missions:">
+      <Text fill="#5e5e5e" layoutX="164.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Task Today:">
          <font>
             <Font size="21.0" />
          </font>

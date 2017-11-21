@@ -59,6 +59,7 @@
               <columns>
                 <TableColumn fx:id="colTopics" prefWidth="235.0" text="Collection" />
                 <TableColumn fx:id="colWords" editable="false" prefWidth="154.0" text="Num Of Words" />
+                  <TableColumn fx:id="colLearn" editable="false" prefWidth="154.0" text="Learned" />
               </columns>
                <contextMenu>
                   <ContextMenu>

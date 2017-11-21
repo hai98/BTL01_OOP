@@ -105,12 +105,14 @@ public class LearnController implements Initializable {
 			});
 
 			btnEasy.setOnAction(event -> {
-				cur.setSeen(true);
 				if (cur.getLevel() == 2) --cG;
 				else if (cur.getLevel() == 3) --cH;
 				++cE;
-				if (!reviewMode)
+				if (!reviewMode) {
+					cur.setSeen(true);
 					queueReview.offer(cur.getEn());
+					t.incLearned();
+				}
 				cur = next();
 			});
 

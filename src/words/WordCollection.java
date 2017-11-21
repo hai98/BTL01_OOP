@@ -12,6 +12,7 @@ public class WordCollection {
 	private String topic;
 	private String fileName;
 	private Map<String, Word> wordList;
+	private int learned;
 
 	/**
 	 * Khởi tạo bộ từ mặc định
@@ -113,6 +114,18 @@ public class WordCollection {
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public void setLearned(int learned) {
+		this.learned = learned;
+	}
+
+	public void incLearned() {
+		 ++learned;
+	}
+
+	public String getRate(){
+		return String.format("%d (%.2f%%)", learned, (double) learned/getSize());
 	}
 
 	/**

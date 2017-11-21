@@ -34,6 +34,7 @@ public abstract class Import {
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			Map<String, Word> wordHashMap = new HashMap<>(sheet.getLastRowNum()-sheet.getFirstRowNum() + 10);
 			String topic = sheet.getRow(0).getCell(0).getStringCellValue().trim();
+			int learned = 0;
 			Row row;
 			String en, vi, imgPath;
 			boolean seen;
@@ -42,6 +43,7 @@ public abstract class Import {
 				en = row.getCell(0).getStringCellValue().trim();
 				vi = row.getCell(1).getStringCellValue().trim();
 				seen = (row.getCell(2) != null) && (row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getCell(2).getBooleanCellValue());
+				if (seen) ++learned;
 				imgPath = (row.getCell(3) == null)? null : row.getCell(3).getStringCellValue();
 				Word t = new Word(en, vi, topic, seen);
 				t.setImgPath(imgPath);
@@ -51,6 +53,7 @@ public abstract class Import {
 			fileIn.close();
 			WordCollection t = new WordCollection(topic, wordHashMap);
 			t.setFileName(fileExcel.getName());
+			t.setLearned(learned);
 			return t;
 		} catch (IOException e){
 			throw new RuntimeException(e);

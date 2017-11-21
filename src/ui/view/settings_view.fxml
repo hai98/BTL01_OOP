@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXSlider?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
@@ -38,7 +39,10 @@
       </GridPane>
       <HBox alignment="CENTER">
          <children>
-            <JFXButton fx:id="btnSave" style="-fx-background-color: #c2c2c2;" text="Save Changes" />
+            <JFXButton fx:id="btnSave" style="-fx-background-color: #c2c2c2;" text="Save Changes">
+               <graphic>
+                  <FontAwesomeIconView glyphName="SAVE" size="18" />
+               </graphic></JFXButton>
          </children>
       </HBox>
    </children>

@@ -316,6 +316,10 @@ public class RunningData {
 		return words;
 	}
 
+	/**
+	 * Chuẩn bị dữ liệu để ôn tập
+	 * @return các từ để ôn tập, null nếu không có từ nào
+	 */
 	public static Queue<Word> prepareForReview(){
 		if (queueReview.isEmpty()) return null;
 		Queue<Word> review = new LinkedList<>();
@@ -373,6 +377,9 @@ public class RunningData {
 		}
 	}
 
+	/**
+	 * Đọc dữ liệu ôn tập từ file
+	 */
 	private static void readQueueReview(){
 		System.out.println("read queue");
 		try {
@@ -390,6 +397,9 @@ public class RunningData {
 		}
 	}
 
+	/**
+	 * Lưu dữ liệu ôn tập vào file
+	 */
 	private static void saveQueueReview(){
 		try {
 			File file = new File("res/voc/queue_review.txt");

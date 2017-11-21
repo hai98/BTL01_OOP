@@ -55,6 +55,9 @@ public class ManageController implements Initializable{
 	private TableColumn<WordCollection, Integer> colWords;
 
 	@FXML
+	private TableColumn<WordCollection, String> colLearn;
+
+	@FXML
 	private Button btnRefresh;
 
 	private ObservableList<WordCollection> topics;
@@ -64,6 +67,7 @@ public class ManageController implements Initializable{
 		topics = FXCollections.observableArrayList(RunningData.getCollectionList());
 		colTopics.setCellValueFactory(new PropertyValueFactory<>("topic"));
 		colWords.setCellValueFactory(new PropertyValueFactory<>("size"));
+		colLearn.setCellValueFactory(new PropertyValueFactory<>("rate"));
 		tableView.setItems(topics);
 
 

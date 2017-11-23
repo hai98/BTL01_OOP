@@ -112,6 +112,7 @@ public class LearnController implements Initializable {
 					cur.setSeen(true);
 					queueReview.offer(cur.getEn());
 					t.incLearned();
+					RunningData.incLearned();
 				}
 				cur = next();
 			});

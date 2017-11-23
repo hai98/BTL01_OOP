@@ -24,11 +24,12 @@ public abstract class Import {
 
 	/**
 	 * Đọc dữ liệu từ file excel
-	 * @param fileExcel tên file excel
+	 * @param fileExcel file excel
 	 * @return bộ từ vựng
 	 */
 	public static WordCollection readExcelFile(File fileExcel) {
 		try {
+			System.out.println(fileExcel.getName());
 			FileInputStream fileIn = new FileInputStream(fileExcel);
 			XSSFWorkbook workbook = new XSSFWorkbook(fileIn);
 			XSSFSheet sheet = workbook.getSheetAt(0);
@@ -39,7 +40,8 @@ public abstract class Import {
 			String en, vi, imgPath;
 			boolean seen;
 			for (int i=2; i<=sheet.getLastRowNum(); ++i) {
-				row = sheet.getRow(i);
+				if ((row = sheet.getRow(i)) == null) continue;
+				if(row.getCell(0) == null) continue;
 				en = row.getCell(0).getStringCellValue().trim();
 				vi = row.getCell(1).getStringCellValue().trim();
 				seen = (row.getCell(2) != null) && (row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getCell(2).getBooleanCellValue());
@@ -55,8 +57,8 @@ public abstract class Import {
 			t.setFileName(fileExcel.getName());
 			t.setLearned(learned);
 			return t;
-		} catch (IOException e){
-			throw new RuntimeException(e);
+		} catch (Exception e){
+			throw new RuntimeException("error while reading excel files", e);
 		}
 
 	}

@@ -60,7 +60,6 @@ public class Home implements Initializable{
 			welcome = FXMLLoader.load(getClass().getResource("view/home_welcome.fxml"));
 			manage = FXMLLoader.load(getClass().getResource("view/manage_view.fxml"));
 			study = FXMLLoader.load(getClass().getResource("view/study_view.fxml"));
-			statistics = FXMLLoader.load(getClass().getResource("view/statistics_view.fxml"));
 			settings = FXMLLoader.load(getClass().getResource("view/settings_view.fxml"));
 
 			setMainPane(welcome);
@@ -89,7 +88,8 @@ public class Home implements Initializable{
 		});
 
 		btnStatistics.setOnAction(event -> {
-			setMainPane(statistics);
+//			setMainPane(statistics);
+			setMainPane(loadStatistic());
 			setButtonBackground(btnStatistics);
 		});
 
@@ -97,6 +97,15 @@ public class Home implements Initializable{
 			setMainPane(settings);
 			setButtonBackground(btnSettings);
 		});
+	}
+
+	private VBox loadStatistic(){
+		try {
+			VBox statistics = FXMLLoader.load(getClass().getResource("view/statistics_view.fxml"));
+			return statistics;
+		}catch (IOException e){
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void setMainPane(Node node){

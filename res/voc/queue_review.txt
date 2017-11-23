@@ -1,10 +1,9 @@
-fish
-cat
-bee
 dolphin
-elephant
-mouse
-butterfly
-dolphin
+leopard
 ant
 bee
+bird
+snooker
+football
+golf
+chess

@@ -8,6 +8,10 @@ import org.omg.IOP.IOR;
 
 import java.io.*;
 import java.text.Normalizer;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -22,6 +26,9 @@ public class RunningData {
 	private static int revWordPerDay;
 	private static int wordsForTest;
 	private static Queue<String> queueReview = new LinkedList<>();
+	private static ObservableList<Integer> statistics = FXCollections.observableArrayList();
+	private static LocalDate lastOpened;
+	private static int learned =0;
 
 //	private static HashSet<String> suggestionList;
 
@@ -41,6 +48,7 @@ public class RunningData {
 		}
 		readSettings();
 		readQueueReview();
+		readStatistic();
 	}
 
 	/**
@@ -105,6 +113,22 @@ public class RunningData {
 
 	public static Queue<String> getQueueReview() {
 		return queueReview;
+	}
+
+	public static LocalDate getLastOpened() {
+		return lastOpened;
+	}
+
+	public static void setLastOpened(LocalDate lastOpened) {
+		RunningData.lastOpened = lastOpened;
+	}
+
+	public static ObservableList<Integer> getStatistics() {
+		return statistics;
+	}
+
+	public static int getLearned() {
+		return learned;
 	}
 
 	/**
@@ -381,7 +405,6 @@ public class RunningData {
 	 * Đọc dữ liệu ôn tập từ file
 	 */
 	private static void readQueueReview(){
-		System.out.println("read queue");
 		try {
 			File file = new File("res/voc/queue_review.txt");
 			FileReader reader = new FileReader(file);
@@ -414,5 +437,63 @@ public class RunningData {
 		} catch (IOException e){
 			throw new RuntimeException("error while writing \"queue_review.txt\"");
 		}
+	}
+
+	private static void readStatistic(){
+		try {
+			File file = new File("res/statistics.txt");
+			FileReader reader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(reader);
+			String s;
+			s = bufferedReader.readLine();
+			lastOpened = LocalDate.parse(s);
+			long days = ChronoUnit.DAYS.between(lastOpened, LocalDate.now());
+			if(days >=10){
+				while (statistics.size()<10){
+					statistics.add(0);
+				}
+				return;
+			}else {
+				for (int i=0; i<days; ++i){
+					s=bufferedReader.readLine();
+				}
+				for(int i=0; i<10-days; ++i){
+					s=bufferedReader.readLine();
+					statistics.add(Integer.parseInt(s));
+				}
+				while (statistics.size()<10){
+					statistics.add(0);
+				}
+			}
+
+			bufferedReader.close();
+			reader.close();
+		} catch (IOException e){
+			throw new RuntimeException("error: read statistics.txt", e);
+		} catch (DateTimeParseException e){
+			throw new RuntimeException("error: parse date");
+		}
+	}
+
+	private static void saveStatistic(){
+		try {
+			File file = new File("res/statistics.txt");
+			FileWriter writer = new FileWriter(file, false);
+			BufferedWriter bufferedWriter = new BufferedWriter(writer);
+			bufferedWriter.write(LocalDate.now().toString());
+			bufferedWriter.newLine();
+			for(int i : statistics){
+				bufferedWriter.write(String.valueOf(i));
+				bufferedWriter.newLine();
+			}
+			bufferedWriter.close();
+			writer.close();
+		} catch (IOException e){
+			throw new RuntimeException("error: write statistics.txt", e);
+		}
+	}
+
+	public static void incLearned(){
+		++learned;
 	}
 }

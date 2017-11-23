@@ -17,6 +17,9 @@ import words.RunningData;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện thống kê
+ */
 public class StatisticsController implements Initializable{
 	@FXML
 	VBox pane;
@@ -24,8 +27,8 @@ public class StatisticsController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<Integer> yValue = RunningData.getStatistics();
-		System.out.println(RunningData.getLearned());
-		yValue.add(9, RunningData.getLearned());
+		yValue.set(9, RunningData.getLearned() + yValue.get(9));
+		RunningData.setLearned(0);
 		final NumberAxis xAxis = new NumberAxis(1, 10, 1);
 		final NumberAxis yAxis = new NumberAxis(0, 50, 5);
 //		xAxis.setLabel("Day");

@@ -24,6 +24,9 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện học từ mới
+ */
 public class LearnController implements Initializable {
 	static Stage stage;
 	static boolean exit = false;
@@ -86,7 +89,7 @@ public class LearnController implements Initializable {
 			reviewMode = true;
 		}
 		if (words == null){
-			MessageBox.show("No words for review", "Info");
+			MessageBox.show("No more words for learn/review", "Info");
 			exit = true;
 		} else {
 			exit = false;

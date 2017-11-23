@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện thêm chủ đề
+ */
 public class AddTopicController implements Initializable {
 	private static Stage stage;
 

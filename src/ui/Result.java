@@ -1,5 +1,8 @@
 package ui;
 
+/**
+ * Class mô tả kết quả kiểm tra của 1 câu hỏi
+ */
 public class Result{
 	private int n;
 	private boolean result;

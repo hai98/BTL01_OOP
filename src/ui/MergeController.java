@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện gộp 2 bộ từ
+ */
 public class MergeController implements Initializable{
 	private ObservableList<WordCollection> topics;
 	private static Stage stage;

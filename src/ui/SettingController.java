@@ -10,6 +10,9 @@ import words.RunningData;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện cài đặt
+ */
 public class SettingController implements Initializable{
 	@FXML
 	Spinner<Integer> newWord;

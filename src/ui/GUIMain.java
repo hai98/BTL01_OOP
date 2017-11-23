@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Class trung tâm phần giao diện
+ */
 public class GUIMain extends Application {
 
 	public static void main(String[] args) {
@@ -27,13 +30,10 @@ public class GUIMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		primaryStage.setTitle("learning_e_app_beta");
+		primaryStage.setTitle("Learning English App");
 		mainStage = primaryStage;
-//		primaryStage.initStyle(StageStyle.TRANSPARENT);
 
 		try {
-//			FXMLLoader loader = new FXMLLoader(GUIMain.class.getResource("look_up_view.fxml"));
-//			VBox pane = loader.load();
 			HBox pane = FXMLLoader.load(getClass().getResource("view/home_view.fxml"));
 			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);

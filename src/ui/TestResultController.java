@@ -13,6 +13,9 @@ import javafx.scene.paint.Paint;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện kết quả kiểm tra
+ */
 public class TestResultController implements Initializable {
 	@FXML
 	private Label rate;

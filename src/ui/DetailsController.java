@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện xem chi tiết bộ từ
+ */
 public class DetailsController implements Initializable{
 	static WordCollection t;
 	private ObservableList<Word> list;

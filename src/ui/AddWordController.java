@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện thêm từ
+ */
 public class AddWordController implements Initializable {
 
 	private static Stage stage;

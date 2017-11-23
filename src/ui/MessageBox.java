@@ -9,6 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Class tạo & điều khiển giao diện thông báo
+ */
 public class MessageBox {
 
 	public static void show(String message, String title)

@@ -16,6 +16,9 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện học từ/ôn từ
+ */
 public class StudyController implements Initializable{
 	@FXML
 	private JFXButton btnLearn;

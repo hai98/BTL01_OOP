@@ -20,6 +20,9 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện quản lý bộ từ
+ */
 public class ManageController implements Initializable{
 	@FXML
 	private Button btnNew;

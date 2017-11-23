@@ -31,7 +31,6 @@ public class RunningData {
 	private static int learned =0;
 
 //	private static HashSet<String> suggestionList;
-
 //	public static HashSet<String> getSuggestionList() {
 //		return suggestionList;
 //	}
@@ -111,24 +110,51 @@ public class RunningData {
 		RunningData.wordsForTest = wordsForTest;
 	}
 
+	/**
+	 * Lấy danh sách từ để ôn tập
+	 * @return các từ để ôn tập
+	 */
 	public static Queue<String> getQueueReview() {
 		return queueReview;
 	}
 
+	/**
+	 * Lấy ngày gần nhất sử dụng chương trình
+	 * @return ngày
+	 */
 	public static LocalDate getLastOpened() {
 		return lastOpened;
 	}
 
-	public static void setLastOpened(LocalDate lastOpened) {
-		RunningData.lastOpened = lastOpened;
-	}
-
+	/**
+	 * Lấy số liệu thống kê
+	 * @return số liệu thống kê
+	 */
 	public static ObservableList<Integer> getStatistics() {
 		return statistics;
 	}
 
+	/**
+	 * Lấy số từ học được trong 1 lần học
+	 * @return số từ
+	 */
 	public static int getLearned() {
 		return learned;
+	}
+
+	/**
+	 * Đặt số từ học được trong 1 lần học
+	 * @param learned số từ học được
+	 */
+	public static void setLearned(int learned) {
+		RunningData.learned = learned;
+	}
+
+	/**
+	 * Tăng 1 vào số từ đã học trong lần học
+	 */
+	public static void incLearned(){
+		++learned;
 	}
 
 	/**
@@ -203,8 +229,7 @@ public class RunningData {
 	 */
 	private static void saveCollectionList(){
 		for(WordCollection i : collectionList){
-			//todo change dir
-			File file = new File("res/test/"+i.getFileName());
+			File file = new File("res/voc/"+i.getFileName());
 			Export.writeExcelFile(i, file);
 		}
 	}
@@ -217,6 +242,7 @@ public class RunningData {
 		saveHistoryList();
 		saveSettings();
 		saveQueueReview();
+		saveStatistic();
 	}
 
 	/**
@@ -224,8 +250,7 @@ public class RunningData {
 	 * @param t bộ từ cần xoá
 	 */
 	public static void deleteCollection(WordCollection t){
-		//todo complete this feature (final)
-		File file = new File("res/test/"+t.getFileName());
+		File file = new File("res/voc/"+t.getFileName());
 		if (file.exists()) {
 			file.delete();
 		}
@@ -297,13 +322,13 @@ public class RunningData {
 		if (t.getWordList().size() <= newWordPerDay){
 			return new LinkedList<>(t.getWordList().values());
 		}
-		//todo if all word seen
 		Queue<Word> words = new LinkedList<>();
 		ArrayList<Word> val = new ArrayList<>(t.getWordList().values());
 		for (int i = 0; i < val.size();) {
 			if(val.get(i).isSeen()) val.remove(i);
 			else ++i;
 		}
+		if (val.isEmpty()) return null;
 		if (val.size() <=newWordPerDay) return new LinkedList<>(val);
 		int rand;
 		Word w;
@@ -439,6 +464,9 @@ public class RunningData {
 		}
 	}
 
+	/**
+	 * Đọc dữ liệu thống kê từ file
+	 */
 	private static void readStatistic(){
 		try {
 			File file = new File("res/statistics.txt");
@@ -475,6 +503,9 @@ public class RunningData {
 		}
 	}
 
+	/**
+	 * Lưu dữ liệu thống kê vào file
+	 */
 	private static void saveStatistic(){
 		try {
 			File file = new File("res/statistics.txt");
@@ -491,9 +522,5 @@ public class RunningData {
 		} catch (IOException e){
 			throw new RuntimeException("error: write statistics.txt", e);
 		}
-	}
-
-	public static void incLearned(){
-		++learned;
 	}
 }

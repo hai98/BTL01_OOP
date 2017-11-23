@@ -15,6 +15,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện tìm kiếm từ
+ */
 public class LookUpController implements Initializable {
 
 	private String key;
@@ -163,4 +166,3 @@ public class LookUpController implements Initializable {
 		}
 	}
 }
-//todo set default image

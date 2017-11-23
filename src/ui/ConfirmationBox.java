@@ -9,7 +9,9 @@ import javafx.scene.text.*;
 import javafx.event.*;
 import javafx.geometry.*;
 
-
+/**
+ * Class tạo & điều khiển giao diện xác nhận
+ */
 public class ConfirmationBox
 {
 

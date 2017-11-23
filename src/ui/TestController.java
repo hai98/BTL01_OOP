@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Class tạo & điều khiển giao diện kiểm tra từ
+ */
 public class TestController implements Initializable{
 	private static Stage stage;
 	static WordCollection t;

@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện chào mừng
+ */
 public class Home implements Initializable{
 
 	@FXML
@@ -101,8 +104,7 @@ public class Home implements Initializable{
 
 	private VBox loadStatistic(){
 		try {
-			VBox statistics = FXMLLoader.load(getClass().getResource("view/statistics_view.fxml"));
-			return statistics;
+			return FXMLLoader.load(getClass().getResource("view/statistics_view.fxml"));
 		}catch (IOException e){
 			throw new RuntimeException(e);
 		}

@@ -25,6 +25,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Class tạo & điều khiển giao diện sửa từ
+ */
 public class EditWordController implements Initializable {
 	private static String key;
 	private static Stage stage;

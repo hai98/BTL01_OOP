@@ -29,6 +29,7 @@ public class RunningData {
 	private static ObservableList<Integer> statistics = FXCollections.observableArrayList();
 	private static LocalDate lastOpened;
 	private static int learned =0;
+	public static boolean[] complete = new boolean[2];
 
 //	private static HashSet<String> suggestionList;
 //	public static HashSet<String> getSuggestionList() {

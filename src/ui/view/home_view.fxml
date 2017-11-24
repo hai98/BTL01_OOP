@@ -28,8 +28,8 @@
                 <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Circle fill="#6f6f6f" radius="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <FontAwesomeIconView fill="#44da5a" glyphName="TRIPADVISOR" size="50" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Circle fill="#6f6f6f" radius="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
+                  <FontAwesomeIconView fill="#44da5a" glyphName="TRIPADVISOR" size="50" textAlignment="CENTER" visible="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <JFXButton fx:id="btnHome" contentDisplay="TOP" layoutX="10.0" layoutY="158.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseEntered="#setOnMoEn" onMouseExited="#setOnMoEx" text="Home" textFill="WHITE" GridPane.rowIndex="1">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="25" textAlignment="CENTER" />

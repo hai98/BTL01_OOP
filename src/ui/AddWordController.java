@@ -71,6 +71,12 @@ public class AddWordController implements Initializable {
 			}
 		});
 
+		en.setOnMouseClicked(event -> {
+			en.selectAll();
+		});
+
+		vi.setOnMouseClicked(event -> vi.selectAll());
+
 		/*vi.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue.isEmpty()) btnOk.setDisable(true);
 			else btnOk.setDisable(false);

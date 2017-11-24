@@ -30,10 +30,10 @@
         </rowConstraints>
          <children>
             <Label text="New words/day" />
-            <Spinner fx:id="revWord" editable="true" focusTraversable="false" prefHeight="26.0" prefWidth="62.0" GridPane.columnIndex="1" />
+            <Spinner fx:id="newWord" editable="true" focusTraversable="false" prefHeight="26.0" prefWidth="62.0" GridPane.columnIndex="1" />
             <Label text="Review words/day" GridPane.rowIndex="1" />
             <Label text="Words/test" GridPane.rowIndex="2" />
-            <Spinner fx:id="newWord" editable="true" focusTraversable="false" prefHeight="26.0" prefWidth="62.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Spinner fx:id="revWord" editable="true" focusTraversable="false" prefHeight="26.0" prefWidth="62.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Spinner fx:id="testWord" editable="true" focusTraversable="false" prefHeight="26.0" prefWidth="62.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>

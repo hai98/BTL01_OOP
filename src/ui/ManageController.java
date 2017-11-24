@@ -82,9 +82,11 @@ public class ManageController implements Initializable{
 		btnRefresh.setOnAction(event -> refresh());
 
 		btnDel.setOnAction(event -> {
-			WordCollection t = tableView.getSelectionModel().getSelectedItem();
-			if(t!=null){
-				RunningData.deleteCollection(t);
+			if(ConfirmationBox.show("Are you sure?", "Confirm?", "Yes", "No")) {
+				WordCollection t = tableView.getSelectionModel().getSelectedItem();
+				if (t != null) {
+					RunningData.deleteCollection(t);
+				}
 			}
 			refresh();
 		});

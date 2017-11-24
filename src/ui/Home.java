@@ -76,7 +76,8 @@ public class Home implements Initializable{
 		});
 
 		btnHome.setOnAction(event -> {
-			setMainPane(welcome);
+//			setMainPane(welcome);
+			setMainPane(loadWelcome());
 			setButtonBackground(btnHome);
 		});
 
@@ -106,6 +107,14 @@ public class Home implements Initializable{
 		try {
 			return FXMLLoader.load(getClass().getResource("view/statistics_view.fxml"));
 		}catch (IOException e){
+			throw new RuntimeException(e);
+		}
+	}
+
+	private VBox loadWelcome(){
+		try {
+			return FXMLLoader.load(getClass().getResource("view/home_welcome.fxml"));
+		} catch (IOException e){
 			throw new RuntimeException(e);
 		}
 	}

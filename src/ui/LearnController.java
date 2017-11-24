@@ -35,7 +35,7 @@ public class LearnController implements Initializable {
 	private Queue<Word> words;
 	private Word cur;
 	private PriorityQueue<Word> pQueue;
-	private int cE,cG,cH;
+	private int cE,cG,cH, total;
 
 	@FXML
 	private JFXProgressBar proBar;
@@ -83,10 +83,12 @@ public class LearnController implements Initializable {
 		if (t!=null) {
 			words = RunningData.prepareForLearn(t);
 			reviewMode = false;
+			total = words.size();
 		}
 		else {
 			words = RunningData.prepareForReview();
 			reviewMode = true;
+			total = words.size();
 		}
 		if (words == null){
 			MessageBox.show("No more words for learn/review", "Info");
@@ -182,12 +184,14 @@ public class LearnController implements Initializable {
 		}else {
 			congrat.setOpacity(1.0);
 			btnShow.setDisable(true);
+			if(reviewMode) RunningData.complete[1] = true;
+			else RunningData.complete[0] = true;
 			return null;
 		}
 		en.setText(w.getEn());
 		vi.setText(w.getVi());
 		setImg(w.getImgPath());
-		proBar.setProgress((5 - words.size() - pQueue.size()) / 5.0);
+		proBar.setProgress((total - words.size() - pQueue.size()) /(double) total);
 		percent.setText(String.format("%.1f%%", proBar.getProgress()*100));
 		return w;
 	}

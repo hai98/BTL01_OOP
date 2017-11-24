@@ -58,3 +58,4 @@ public class GUIMain extends Application {
 		}
 	}
 }
+//todo complete welcome screen
